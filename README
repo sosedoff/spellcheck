@@ -1,0 +1,23 @@
+= About
+
+SpellCheck is Ruby library to process word/phrase spelling check based on local dictionary.
+Redis used as a dictionary storage and cache purposes. 
+
+= Usage
+
+require 'rubygems'
+require 'redis'
+require 'spellcheck'
+
+# you can specify a new redis client instance or existing one.
+# :db -> specify database index (default => current)
+sp = SpellCheck.new(Redis.new, :db => 1)
+
+# setup your dictionary by flushing all existing data
+# ONLY ONE TIME CALL!!!
+sp.flush
+sp.load_source('/path/to/textfile')
+
+# default usage
+puts "Corrected word: #{sp.correct('saterday')}" # => 'saturday'
+puts "Corrected phrase: #{sp.correct_phrase('tthat wqs awesone')}" # => 'that was awesome'
