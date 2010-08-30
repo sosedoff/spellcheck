@@ -45,6 +45,10 @@ class SpellCheck
     @redis.flushdb
   end
   
+  def dbsize
+    @redis.dbsize
+  end
+  
   def load_source(path)
     raise ArgumentError, "Input file required!" if path.nil?
     raise ArgumentError, "File #{path} does not exist!" unless File.exists?(path)
